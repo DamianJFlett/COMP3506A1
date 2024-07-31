@@ -58,10 +58,10 @@ class DoublyLinkedList:
         current_node = self.head
         output = "["
         while current_node:
+            output += current_node.get_data()
             output += ", "
-            output += str(current_node)
-            current_node = current_node.next
-        output += "]"
+            current_node = current_node.get_next()
+        output = output[:-2] + "]"
         return output
 
         
@@ -114,8 +114,13 @@ class DoublyLinkedList:
         Insert a node to the front of the list
         Time complexity for full marks: O(1)
         """
+        if self.head:
+            node.set_next(self.head)
+            node.get_next().set_prev(node)
+        else:
+            node.set_next(None)
+            self.tail = node
         node.set_prev(None)
-        node.set_next(self.head)
         self.head = node
 
     def insert_to_back(self, node: Node) -> None:
@@ -123,7 +128,12 @@ class DoublyLinkedList:
         Insert a node to the back of the list
         Time complexity for full marks: O(1)
         """
-        node.set_prev(self.tail)
+        if self.tail:
+            node.set_prev(self.tail)
+            node.get_prev().set_next(node)
+        else:
+            node.set_prev(None)
+            self.head = node
         node.set_next(None)
         self.tail = node
 
@@ -132,14 +142,16 @@ class DoublyLinkedList:
         Remove and return the front element
         Time complexity for full marks: O(1)
         """
-        pass
+        self.head = self.head.get_next()
+        self.head.set_prev(None)
 
     def remove_from_back(self) -> Node | None:
         """
         Remove and return the back element
         Time complexity for full marks: O(1)
         """
-        pass
+        self.tail = self.tail.get_prev()
+        self.tail.set_next(None)
 
     def find_element(self, elem: Any) -> Any | None:
         """
@@ -147,15 +159,25 @@ class DoublyLinkedList:
         node if it matches the input elem; returns None otherwise
         Time complexity for full marks: O(N)
         """
-        pass
-
+        current_node = self.head
+        while current_node:
+            if (current_node.get_data() == elem):
+                return current_node
+        return None
+    
     def find_and_remove_element(self, elem: Any) -> Any | None:
         """
         Finds, removes, and returns the first instance of elem
         (based on the node data) or returns None if the element is not found.
         Time complexity for full marks: O(N)
         """
-        pass
+        current_node = self.head
+        while current_node:
+            if (current_node.get_data() == elem):
+                current_node.get_prev().set_next(current_node.get_next())
+                current_node.get_next().set_prev(current_node.get_prev())
+                return current_node
+        return None
 
     def reverse(self) -> None:
         """

@@ -36,7 +36,9 @@ def test_linked_list():
     my_list.insert_to_back(Node("algorithms"))
 
     # Have a look - we can do this due to overriding __str__ in the class
-    print(str(my_list))
+    print(str(my_list)) 
+
+
 
     # Now lets try to find a node
     elem = my_list.find_element("algorithms")
