@@ -89,6 +89,9 @@ class DoublyLinkedList:
         Replace the leftmost node in the list.
         Time complexity for full marks: O(1)
         """
+        if not self.head:
+            self.size+=1
+            self.tail = node
         self.head = node
 
     def get_tail(self) -> Node | None:
@@ -103,6 +106,9 @@ class DoublyLinkedList:
         Replace the rightmost node in the list.
         Time complexity for full marks: O(1)
         """
+        if not self.tail:
+            self.size+=1
+            self.head = node
         self.tail = node
 
     """
@@ -122,6 +128,7 @@ class DoublyLinkedList:
             self.tail = node
         node.set_prev(None)
         self.head = node
+        self.size+=1
 
     def insert_to_back(self, node: Node) -> None:
         """
@@ -136,6 +143,7 @@ class DoublyLinkedList:
             self.head = node
         node.set_next(None)
         self.tail = node
+        self.size+=1
 
     def remove_from_front(self) -> Node | None:
         """
@@ -144,6 +152,7 @@ class DoublyLinkedList:
         """
         self.head = self.head.get_next()
         self.head.set_prev(None)
+        size -=1
 
     def remove_from_back(self) -> Node | None:
         """
@@ -152,6 +161,7 @@ class DoublyLinkedList:
         """
         self.tail = self.tail.get_prev()
         self.tail.set_next(None)
+        self.size -=1
 
     def find_element(self, elem: Any) -> Any | None:
         """
@@ -163,6 +173,7 @@ class DoublyLinkedList:
         while current_node:
             if (current_node.get_data() == elem):
                 return current_node
+            current_node = current_node.get_next()
         return None
     
     def find_and_remove_element(self, elem: Any) -> Any | None:
@@ -174,9 +185,18 @@ class DoublyLinkedList:
         current_node = self.head
         while current_node:
             if (current_node.get_data() == elem):
-                current_node.get_prev().set_next(current_node.get_next())
-                current_node.get_next().set_prev(current_node.get_prev())
+                if (current_node.get_prev() and current_node.get_next()):
+                    current_node.get_prev().set_next(current_node.get_next())
+                    current_node.get_next().set_prev(current_node.get_prev())
+                elif current_node.get_prev():
+                    self.set_tail(current_node.get_prev())
+                    current_node.get_prev().set_next(None)
+                elif current_node.get_next():
+                    self.set_head(current_node.get_next())
+                    current_node.get_next().set_prev(None)
+                self.size-=1
                 return current_node
+            current_node = current_node.get_next()
         return None
 
     def reverse(self) -> None:
@@ -184,4 +204,16 @@ class DoublyLinkedList:
         Reverses the linked list
         Time complexity for full marks: O(1)
         """
-        pass
+        current_node = self.get_head()
+        while current_node:
+            new_next = current_node.get_prev()
+            new_prev = current_node.get_next()
+            current_node.set_next(new_next)
+            current_node.set_prev(new_prev)
+            current_node = current_node.get_prev()
+        new_head = self.get_tail()
+        new_tail = self.get_head()
+        self.set_tail(new_tail)
+        self.set_head(new_head)
+
+
