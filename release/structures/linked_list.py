@@ -42,29 +42,22 @@ class Node:
 class DoublyLinkedList:
     """
     Your doubly linked list code goes here.
+    Note that any time you see `Any` in the type annotations,
+    this refers to the "data" stored inside a Node.
+
+    [V3: Note that this API was changed in the V3 spec] 
     """
 
     def __init__(self) -> None:
         # You probably need to track some data here...
-        self.head = None
-        self.tail = None
-        self.size = 0
+        pass
 
     def __str__(self) -> str:
         """
         A helper that allows you to print a DoublyLinkedList type
         via the str() method.
         """
-        current_node = self.head
-        output = "["
-        while current_node:
-            output += current_node.get_data()
-            output += ", "
-            current_node = current_node.get_next()
-        output = output[:-2] + "]"
-        return output
-
-        
+        pass
 
     """
     Simple Getters and Setters below
@@ -75,145 +68,92 @@ class DoublyLinkedList:
         Return the size of the list.
         Time complexity for full marks: O(1)
         """
-        return self.size
+        pass
 
-    def get_head(self) -> Node | None:
+    def get_head(self) -> Any | None:
         """
-        Return the leftmost node in the list, if it exists.
+        Return the data of the leftmost node in the list, if it exists.
         Time complexity for full marks: O(1)
         """
-        return self.head
+        pass
 
-    def set_head(self, node: Node) -> None:
+    def set_head(self, data: Any) -> None:
         """
-        Replace the leftmost node in the list.
+        Replace the leftmost node's data with the given data.
+        If the list is empty, do nothing.
         Time complexity for full marks: O(1)
         """
-        if not self.head:
-            self.size+=1
-            self.tail = node
-        self.head = node
+        pass
 
-    def get_tail(self) -> Node | None:
+    def get_tail(self) -> Any | None:
         """
-        Return the rightmost node in the list, if it exists.
+        Return the data of the rightmost node in the list, if it exists.
         Time complexity for full marks: O(1)
         """
-        return self.tail
+        pass
 
-    def set_tail(self, node: Node) -> None:
+    def set_tail(self, data: Any) -> None:
         """
-        Replace the rightmost node in the list.
+        Replace the rightmost node's data with the given data.
+        If the list is empty, do nothing.
         Time complexity for full marks: O(1)
         """
-        if not self.tail:
-            self.size+=1
-            self.head = node
-        self.tail = node
+        pass
 
     """
     More interesting functionality now.
     """
 
-    def insert_to_front(self, node: Node) -> None:
+    def insert_to_front(self, data: Any) -> None:
         """
-        Insert a node to the front of the list
+        Insert the given data to the front of the list.
+        Hint: You will need to create a Node type containing
+        the given data.
         Time complexity for full marks: O(1)
         """
-        if self.head:
-            node.set_next(self.head)
-            node.get_next().set_prev(node)
-        else:
-            node.set_next(None)
-            self.tail = node
-        node.set_prev(None)
-        self.head = node
-        self.size+=1
+        pass
 
-    def insert_to_back(self, node: Node) -> None:
+    def insert_to_back(self, data: Any) -> None:
         """
-        Insert a node to the back of the list
+        Insert the given data (in a node) to the back of the list
         Time complexity for full marks: O(1)
         """
-        if self.tail:
-            node.set_prev(self.tail)
-            node.get_prev().set_next(node)
-        else:
-            node.set_prev(None)
-            self.head = node
-        node.set_next(None)
-        self.tail = node
-        self.size+=1
+        pass
 
-    def remove_from_front(self) -> Node | None:
+    def remove_from_front(self) -> Any | None:
         """
-        Remove and return the front element
+        Remove the front node, and return the data it holds.
         Time complexity for full marks: O(1)
         """
-        self.head = self.head.get_next()
-        self.head.set_prev(None)
-        size -=1
+        pass
 
-    def remove_from_back(self) -> Node | None:
+    def remove_from_back(self) -> Any | None:
         """
-        Remove and return the back element
+        Remove the back node, and return the data it holds.
         Time complexity for full marks: O(1)
         """
-        self.tail = self.tail.get_prev()
-        self.tail.set_next(None)
-        self.size -=1
+        pass
 
-    def find_element(self, elem: Any) -> Any | None:
+    def find_element(self, elem: Any) -> bool:
         """
-        Looks at the data inside each node of the list and returns the
-        node if it matches the input elem; returns None otherwise
+        Looks at the data inside each node of the list and returns True
+        if a match is found; False otherwise.
         Time complexity for full marks: O(N)
         """
-        current_node = self.head
-        while current_node:
-            if (current_node.get_data() == elem):
-                return current_node
-            current_node = current_node.get_next()
-        return None
-    
-    def find_and_remove_element(self, elem: Any) -> Any | None:
+        pass
+
+    def find_and_remove_element(self, elem: Any) -> bool:
         """
-        Finds, removes, and returns the first instance of elem
-        (based on the node data) or returns None if the element is not found.
+        Looks at the data inside each node of the list; if a match is
+        found, this node is removed from the linked list, and True is returned.
+        False is returned if no match is found.
         Time complexity for full marks: O(N)
         """
-        current_node = self.head
-        while current_node:
-            if (current_node.get_data() == elem):
-                if (current_node.get_prev() and current_node.get_next()):
-                    current_node.get_prev().set_next(current_node.get_next())
-                    current_node.get_next().set_prev(current_node.get_prev())
-                elif current_node.get_prev():
-                    self.set_tail(current_node.get_prev())
-                    current_node.get_prev().set_next(None)
-                elif current_node.get_next():
-                    self.set_head(current_node.get_next())
-                    current_node.get_next().set_prev(None)
-                self.size-=1
-                return current_node
-            current_node = current_node.get_next()
-        return None
+        pass
 
     def reverse(self) -> None:
         """
         Reverses the linked list
         Time complexity for full marks: O(1)
         """
-        current_node = self.get_head()
-        while current_node:
-            new_next = current_node.get_prev()
-            new_prev = current_node.get_next()
-            current_node.set_next(new_next)
-            current_node.set_prev(new_prev)
-            current_node = current_node.get_prev()
-        new_head = self.get_tail()
-        new_tail = self.get_head()
-        self.set_tail(new_tail)
-        self.set_head(new_head)
-
-
+        pass
