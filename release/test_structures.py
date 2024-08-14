@@ -33,31 +33,39 @@ def test_linked_list():
     assert(my_list.get_size() == 0)
 
     my_list.insert_to_front("hello")
+    print(my_list.get_head(), "head")
+    print(my_list.get_tail(), "tail")
     my_list.insert_to_back("algorithms")
-
+    print(my_list.get_head(), "head")
+    print(my_list.get_tail(), "tail")
+    
     # Have a look - we can do this due to overriding __str__ in the class
     print(str(my_list), "Size is", my_list.get_size()) 
+    print(my_list.get_head(), "head")
+    print(my_list.get_tail(), "tail")
 
 
 
     # Now lets try to find a node
     elem = my_list.find_element("algorithms")
-    if elem is not None:
-        print ("Found node with data = ", elem.get_data())
+    if elem:
+        print("algorithms is indeed in the list")
+    else:
+        print("algorithms not found!")
 
     # And try to delete one
     elem = my_list.find_and_remove_element("1337")
-    if elem is not None:
-        print ("Deleted ", elem.get_data())
+    if elem:
+        print ("Hang on, that wasn't in the list!")
     else:
-        print ("Didn't find element = 1337")
+        print ("No such element 1337")
 
     # And try to delete another one
     elem = my_list.find_and_remove_element("hello")
-    if elem is not None:
-        print ("Deleted ", elem.get_data())
+    if elem:
+        print ("Deleted something")
     else:
-        print ("Didn't find element = world")
+        print ("Didn't find element = hello")
 
     # Have another look
     print(str(my_list))

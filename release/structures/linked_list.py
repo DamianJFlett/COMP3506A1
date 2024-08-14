@@ -60,13 +60,26 @@ class DoublyLinkedList:
         A helper that allows you to print a DoublyLinkedList type
         via the str() method.
         """
-        if self._reversed:
-            pass
-        current_node = self._head
-        while cur
+        rep = "["
+        if not self._reversed:
+            current_node = self._head
+        else:
+            current_node = self._tail
+        while current_node:
+            if not self._reversed:
+                next_node = current_node.get_next()
+            else:
+                next_node = current_node.get_prev()
+            rep += str(current_node.get_data())
+            if next_node:
+                rep += ", "
+            else:
+                rep += "]"
+            current_node = next_node
+        return rep
     """
-    Simple Getters and Set
-
+    Simple Getters and Setters
+    """
     def get_size(self) -> int:
         """
         Return the size of the list.
@@ -79,7 +92,9 @@ class DoublyLinkedList:
         Return the data of the leftmost node in the list, if it exists.
         Time complexity for full marks: O(1)
         """
-        return self._head.get_data()
+        if not self._reversed:
+            return self._head.get_data()
+        return self._tail.get_data()
 
     def set_head(self, data: Any) -> None:
         """
@@ -87,23 +102,29 @@ class DoublyLinkedList:
         If the list is empty, do nothing.
         Time complexity for full marks: O(1)
         """
-        if self._head:
+        if self._head and (not self._reversed):
             self._head.set_data(data)
+        elif self._tail:
+            self._tail.set_data(data)
+
     def get_tail(self) -> Any | None:
         """
         Return the data of the rightmost node in the list, if it exists.
         Time complexity for full marks: O(1)
         """
-        return self._tail.get_data()
-
+        if not self._reversed:
+            return self._tail.get_data()
+        return self._head.get_data()
     def set_tail(self, data: Any) -> None:
         """
         Replace the rightmost node's data with the given data.
         If the list is empty, do nothing.
         Time complexity for full marks: O(1)
         """
-        if self._tail:
+        if self._tail and (not self._reversed):
             self._tail.set_data(data)
+        elif self._head:
+            self._head.set_data(data)
     """
     More interesting functionality now.
     """
@@ -116,21 +137,31 @@ class DoublyLinkedList:
         Time complexity for full marks: O(1)
         """
         new_head = Node(data)
-        new_head.set_next(self._head)
-        if self._head:
-            self._head.set_prev(new_head)
-        self._head = new_head
+        self._size +=1
+        if not self._reversed:
+            new_head.set_next(self._head)
+            if self._head:
+                self._head.set_prev(new_head)
+            else:
+                self._tail = new_head
+            self._head = new_head
+        else:
+            new_head.set_prev(self._tail)
+            if self._tail:
+                self._tail.set_next(new_head)
+            self._tail = new_head
 
     def insert_to_back(self, data: Any) -> None:
         """
         Insert the given data (in a node) to the back of the list
         Time complexity for full marks: O(1)
         """
+        self._size += 1
         new_tail = Node(data)
         new_tail.set_prev(self._tail)
         if self._tail:
             self._tail.set_next(new_tail)
-        self._head = new_tail
+        self._tail = new_tail
 
 
     def remove_from_front(self) -> Any | None:
@@ -138,6 +169,7 @@ class DoublyLinkedList:
         Remove the front node, and return the data it holds.
         Time complexity for full marks: O(1)
         """
+        self._size-= 1
         self._head = self._head.get_next()
         self._head.set_prev(None)
 
@@ -146,9 +178,11 @@ class DoublyLinkedList:
         Remove the back node, and return the data it holds.
         Time complexity for full marks: O(1)
         """
+        self._size -= 1
         self._tail = self._tail.get_next()
         self._tail.set_next(None)
 
+    
     def find_element(self, elem: Any) -> bool:
         """
         Looks at the data inside each node of the list and returns True
