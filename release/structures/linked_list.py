@@ -52,19 +52,20 @@ class DoublyLinkedList:
         # You probably need to track some data here...
         self._head = None
         self._tail = None
-        self.reversed = False
-        self._size = None
+        self._reversed = False
+        self._size = 0
 
     def __str__(self) -> str:
         """
         A helper that allows you to print a DoublyLinkedList type
         via the str() method.
         """
-        pass
-
+        if self._reversed:
+            pass
+        current_node = self._head
+        while cur
     """
-    Simple Getters and Setters below
-    """
+    Simple Getters and Set
 
     def get_size(self) -> int:
         """
