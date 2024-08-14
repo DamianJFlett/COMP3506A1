@@ -201,4 +201,4 @@ class DoublyLinkedList:
         Reverses the linked list
         Time complexity for full marks: O(1)
         """
-        pass
+        self._reversed = not self._reversed

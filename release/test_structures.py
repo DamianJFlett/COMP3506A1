@@ -32,8 +32,8 @@ def test_linked_list():
     my_list = DoublyLinkedList()
     assert(my_list.get_size() == 0)
 
-    my_list.insert_to_front(Node("hello"))
-    my_list.insert_to_back(Node("algorithms"))
+    my_list.insert_to_front("hello")
+    my_list.insert_to_back("algorithms")
 
     # Have a look - we can do this due to overriding __str__ in the class
     print(str(my_list), "Size is", my_list.get_size()) 
