@@ -11,17 +11,34 @@ class DynamicArray:
     def __init__(self) -> None:
         self._size = 0
         self._capacity = 1
-        self._elements = [None] * 10
+        self._elements = [None] * self._capacity
+        self._reversed = False
 
     def __str__(self) -> str:
         """
         A helper that allows you to print a DynamicArray type
         via the str() method.
         """
-        pass
+        rep = "[]"
+        if not self._reversed: #not right, what about all the noen elements
+            for (index, element) in enumerate(self._elements):
+                rep += element
+                if self._size != index - 1:
+                    rep += ", "
+                else:
+                    rep += "]"
+        else:
+            i = self._size
+            while i > 0:
+                rep += self._elements[i]
+                rep += ", "
+                i -= 1
+            rep += self._elements[i]
+            rep += "]"
+        return rep
 
     def __resize(self) -> None:
-        pass
+        capacity = capacity * 2
 
     def get_at(self, index: int) -> Any | None:
         """
@@ -29,14 +46,16 @@ class DynamicArray:
         Return None if index is out of bounds.
         Time complexity for full marks: O(1)
         """
-        pass
+        i = 1
+        if not self._reversed:
+
 
     def __getitem__(self, index: int) -> Any | None:
         """
         Same as get_at.
         Allows to use square brackets to index elements.
         """
-        pass
+        return self.get_at(index)
 
     def set_at(self, index: int, element: Any) -> None:
         """
@@ -51,7 +70,7 @@ class DynamicArray:
         Same as set_at.
         Allows to use square brackets to index elements.
         """
-        pass
+        return self.set_at(index)
 
     def append(self, element: Any) -> None:
         """
@@ -72,7 +91,7 @@ class DynamicArray:
         Reverse the array.
         Time complexity for full marks: O(1)
         """
-        pass
+        self._reversed = not self._reversed
 
     def remove(self, element: Any) -> None:
         """
@@ -95,28 +114,28 @@ class DynamicArray:
         Boolean helper to tell us if the structure is empty or not
         Time complexity for full marks: O(1)
         """
-        pass
+        return self._size == 0
 
     def is_full(self) -> bool:
         """
         Boolean helper to tell us if the structure is full or not
         Time complexity for full marks: O(1)
         """
-        pass
+        return self._size == self._capacity
 
     def get_size(self) -> int:
         """
         Return the number of elements in the list
         Time complexity for full marks: O(1)
         """
-        pass
+        return self._size
 
     def get_capacity(self) -> int:
         """
         Return the total capacity (the number of slots) of the list
         Time complexity for full marks: O(1)
         """
-        pass
+        return self._capacity
 
     def sort(self) -> None:
         """

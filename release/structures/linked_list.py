@@ -203,11 +203,11 @@ class DoublyLinkedList:
         if not self._head.get_next():
             self._head = None
             self._tail = None
-            return removed
+            return removed.get_data()
         else:
             self._head = removed.get_next()
             self._head.set_prev(None)
-            return removed
+            return removed.get_data()
 
         
 
@@ -219,11 +219,11 @@ class DoublyLinkedList:
         if not self._tail.get_prev():
             self._head = None
             self._tail = None
-            return removed
+            return removed.get_data()
         else:
             self._tail = removed.get_prev()
             self._tail.set_next(None)
-            return removed
+            return removed.get_data()
 
 
     def find_element(self, elem: Any) -> bool:

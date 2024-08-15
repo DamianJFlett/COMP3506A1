@@ -150,6 +150,25 @@ def test_linked_list():
     new_list.reverse()
     print(str(new_list), "size is", new_list.get_size())
 
+    print("remove from x tests --------------")
+    removal = DoublyLinkedList()
+    removal.insert_to_front("5")
+    removal.insert_to_front("4")
+    removal.insert_to_front("3")
+    removal.insert_to_front("2")
+    removal.insert_to_front("1")
+    print("removal rn", removal.__str__())
+    print(removal.remove_from_back())
+    print("removed from back", str(removal), "size is", removal.get_size())
+    removal.remove_from_front()
+    print("removed from front", str(removal), "size is", removal.get_size())
+    removal.reverse()
+    print("reversed, list is now", str(removal))
+    print(removal.remove_from_front())
+    print("removed from front", str(removal))
+
+    
+
 
 
 
