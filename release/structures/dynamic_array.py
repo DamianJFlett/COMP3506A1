@@ -48,6 +48,7 @@ class DynamicArray:
         """
         i = 1
         if not self._reversed:
+            pass
 
 
     def __getitem__(self, index: int) -> Any | None:
