@@ -90,6 +90,8 @@ class DoublyLinkedList:
         Return the data of the leftmost node in the list, if it exists.
         Time complexity for full marks: O(1)
         """
+        if not (self._tail or self._head):
+            return None
         if not self._reversed:
             return self._head.get_data()
         return self._tail.get_data()
@@ -110,6 +112,8 @@ class DoublyLinkedList:
         Return the data of the rightmost node in the list, if it exists.
         Time complexity for full marks: O(1)
         """
+        if not (self._tail or self._head):
+            return None
         if not self._reversed:
             return self._tail.get_data()
         return self._head.get_data()
@@ -155,6 +159,8 @@ class DoublyLinkedList:
         new_tail.set_prev(self._tail)
         if self._tail:
             self._tail.set_next(new_tail)
+        else:
+            self._head = new_tail
         self._tail = new_tail
 
     def insert_to_back(self, data: Any) -> None:
@@ -190,24 +196,35 @@ class DoublyLinkedList:
             return self.remove_from_back_logical()
 
     def remove_from_front_logical(self) -> Any:
+        if not self._head:
+            return None
         self._size -= 1
-        curr = self._head
-        self._head = self._head.get_next()
-        if self._head:
-            self._head.set_prev(None)
-        else:
+        removed = self._head
+        if not self._head.get_next():
+            self._head = None
             self._tail = None
-        return curr
+            return removed
+        else:
+            self._head = removed.get_next()
+            self._head.set_prev(None)
+            return removed
+
+        
 
     def remove_from_back_logical(self) -> Any:
+        if not self._tail:
+            return None
         self._size -= 1
-        curr = self._tail
-        self._tail = self._tail.get_prev()
-        if self._tail:
-            self._tail.set_next(None)
-        else:
+        removed = self._tail
+        if not self._tail.get_prev():
             self._head = None
-        return curr
+            self._tail = None
+            return removed
+        else:
+            self._tail = removed.get_prev()
+            self._tail.set_next(None)
+            return removed
+
 
     def find_element(self, elem: Any) -> bool:
         """
@@ -239,22 +256,22 @@ class DoublyLinkedList:
                 self._head = None
                 self._tail = None
                 self._size -=1
-                return curr
+                return True
             elif (curr.get_next() and (not curr.get_prev())):
                 self._head = curr.get_next()
                 curr.get_next().set_prev(None)
                 self._size -=1
-                return curr
+                return True
             elif ((not curr.get_next()) and curr.get_prev()):
                 self._tail = curr.get_prev()
                 curr.get_prev().set_next(None)
                 self._size -=1
-                return curr
+                return True
             else:
                 curr.get_prev().set_next(curr.get_next())
                 curr.get_next().set_prev(curr.get_prev())
                 self._size -=1
-                return curr
+                return True
         return False
 
     def reverse(self) -> None:

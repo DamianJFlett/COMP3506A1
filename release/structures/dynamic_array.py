@@ -9,7 +9,9 @@ from typing import Any
 
 class DynamicArray:
     def __init__(self) -> None:
-        pass
+        self._size = 0
+        self._capacity = 1
+        self._elements = [None] * 10
 
     def __str__(self) -> str:
         """
