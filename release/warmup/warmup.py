@@ -55,7 +55,8 @@ def main_character(instring: list[int]) -> int:
     main_character([7, 1, 2, 7]) == 3
     main_character([60000, 120000, 654321, 999, 1337, 133731337]) == -1
     """
-
+    #hash - keep track of current numbers with something like a hashset
+    pass
 
 def missing_odds(inputs: list[int]) -> int:
     """
@@ -82,8 +83,7 @@ def missing_odds(inputs: list[int]) -> int:
     missing_odds([4, 1]) == 3
     missing_odds([4, 1, 8, 5]) == 10    # 3 and 7 are missing
     """
-
-    # YOUR CODE GOES HERE
+    #sort first - can this be avoided?
     pass
 
 
@@ -117,6 +117,7 @@ def k_cool(k: int, n: int) -> int:
 
     # YOUR CODE GOES HERE
     answer = 0  # please update with the real answer... :-)
+    #easy way - get all by keeping track of currently available stuff and breaking down as such
     return answer % MODULUS
 
 
@@ -186,5 +187,6 @@ def road_illumination(road_length: int, poles: list[int]) -> float:
     road_illumination(5, [2, 5]) == 2.0
     """
 
-    # YOUR CODE GOES HERE
     pass
+    #start by sorting? then minimum size needed can be determined by iterating through the list and checking
+    #if it covers - Current cover after iterating through is this, do we need better to illuminate here

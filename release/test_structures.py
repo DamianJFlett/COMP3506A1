@@ -38,7 +38,7 @@ def test_linked_list():
     my_list.insert_to_back("algorithms")
     print(my_list.get_head(), "head")
     print(my_list.get_tail(), "tail")
-    
+
     # Have a look - we can do this due to overriding __str__ in the class
     print(str(my_list), "Size is", my_list.get_size()) 
     print(my_list.get_head(), "head")
@@ -72,6 +72,39 @@ def test_linked_list():
 
     # OK, now check size
     assert(my_list.get_size() == 1)
+
+
+    #some more tests for larger sizes
+    new_list = DoublyLinkedList()
+    new_list.insert_to_front("1")
+    new_list.insert_to_back("2")
+    new_list.insert_to_front("0")
+    new_list.insert_to_back("3")
+    new_list.insert_to_back("4")
+    print(str(new_list), "size = ", new_list.get_size())
+    print("head and tail are", new_list.get_head(), new_list.get_tail())
+    new_list.remove_from_front()
+    print("head and tail are", new_list.get_head(), new_list.get_tail())
+    new_list.remove_from_back()
+    print("head and tail are", new_list.get_head(), new_list.get_tail())
+    print(str(new_list), "Size is", new_list.get_size())
+    new_list.reverse()
+    print(str(new_list),  "now reversed")
+    new_list.insert_to_front("4")
+    new_list.insert_to_back("0")
+    print(str(new_list), "size is now", new_list.get_size())
+    new_list.remove_from_front()
+    print("element removed from front, list is not", new_list, "size is", new_list.get_size())
+    new_list.remove_from_front()
+    print("element removed from front, list is not", new_list, "size is", new_list.get_size())
+    new_list.remove_from_back()
+    print("element removed from back, list is not", new_list, "size is", new_list.get_size())
+    new_list.remove_from_back()
+    print("element removed from back, list is not", new_list, "size is", new_list.get_size())
+    new_list.remove_from_front()
+    print("element removed from front, list is not", new_list, "size is", new_list.get_size())
+
+
 
 def test_dynamic_array():
     """
