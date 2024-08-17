@@ -168,8 +168,21 @@ class DynamicArray:
         """
         if (index >= self._size) or (index < 0):
             return
+        removed = self[index]
         if not self._reversed:
-            pass
+            i = index
+            while i < self._size -1:
+                self[i] = self[i+1]
+                i += 1
+        else:
+            i = index
+            while i > 0:
+                self[i] = self[i-1]
+                i -= 1
+        self._last -= 1
+        self._size -= 1
+        return removed
+                
 
 
     def is_empty(self) -> bool:
