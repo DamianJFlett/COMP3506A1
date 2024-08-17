@@ -49,7 +49,6 @@ class DynamicArray:
         self._first = self._first + self._capacity // 4
         self._last = self._last + self._capacity // 4
         self._elements = new_elements
-        print(self._elements)
         
 
     def get_at(self, index: int) -> Any | None:
@@ -58,6 +57,8 @@ class DynamicArray:
         Return None if index is out of bounds.
         Time complexity for full marks: O(1)
         """
+        if (index >= self._size) or (index < 0):
+            return
         if not self._reversed:
             return self._elements[self._first + index]
         else:
@@ -77,6 +78,8 @@ class DynamicArray:
         Do not modify the list if the index is out of bounds.
         Time complexity for full marks: O(1)
         """
+        if (index >= self._size) or (index < 0):
+            return
         if not self._reversed:
             self._elements[index + self._first] = element
         else:
@@ -106,7 +109,7 @@ class DynamicArray:
             self._first = 0
             self._last = 0
             return
-        if self.is_full():
+        if self.is_full() or self._first - 1 <= 0:
             self.__resize()
         self._elements[self._first -1] = element
         self._first -= 1
@@ -117,7 +120,7 @@ class DynamicArray:
             self._first = 0
             self._last = 0
             return
-        if self.is_full():
+        if self.is_full() or self._last + 1 >= self._capacity:
             self.__resize()
         self._elements[self._last + 1] = element
         self._last += 1
@@ -151,6 +154,11 @@ class DynamicArray:
             while i <= self._last:
                 if self._elements[i] == element:
                     self.remove_at(i - self._size)
+        else:
+            i = self._last
+            while i >= self._first:
+                if self._elements[i] == element:
+                    self.remove_at(i - self._size)
 
     def remove_at(self, index: int) -> Any | None:
         """
@@ -158,7 +166,11 @@ class DynamicArray:
         If there is no such element, leave the array unchanged and return None.
         Time complexity for full marks: O(N)
         """
-        pass
+        if (index >= self._size) or (index < 0):
+            return
+        if not self._reversed:
+            pass
+
 
     def is_empty(self) -> bool:
         """
@@ -193,4 +205,5 @@ class DynamicArray:
         Sort elements inside _data based on < comparisons.
         Time complexity for full marks: O(NlogN)
         """
+        #do without copying to a new array to save space? necessary?
         pass

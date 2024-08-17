@@ -196,6 +196,11 @@ def test_dynamic_array():
     print(str(my_list))
     my_list.reverse()
     print(str(my_list))
+    my_list[3] = 11
+    my_list[5] = 10
+    print("added 11 at 3 and 10 at 5, new list is ", str(my_list))
+    my_list.reverse()
+    print("reversed,list is ", str(my_list),"0th  and 12th element is",my_list[0], my_list[12])
 
 
 def test_bitvector():

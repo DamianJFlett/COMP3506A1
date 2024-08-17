@@ -194,9 +194,9 @@ class DoublyLinkedList:
         Time complexity for full marks: O(1)
         """
         if self._reversed:
-            return self.remove_from_front_logical()
+            return self._remove_from_front_logical()
         else:
-            return self.remove_from_back_logical()
+            return self._remove_from_back_logical()
 
     def _remove_from_front_logical(self) -> Any:
         if not self._head:
