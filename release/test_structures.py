@@ -176,7 +176,27 @@ def test_dynamic_array():
 
     my_list = DynamicArray()
     my_list.append(1)
+    my_list.append(2)
+    my_list.append(3)
+    my_list.append(4)
+    my_list.append(5)
     print(str(my_list))
+    my_list.prepend(0)
+    my_list.prepend(-1)
+    my_list.prepend(-2)
+    my_list.prepend(-3)
+    my_list.prepend(-4)
+    my_list.append(6)
+    print(str(my_list))
+    print("size is", my_list.get_size())
+    my_list.reverse()
+    print("reversed, list is now", str(my_list))
+    my_list.append(-5)
+    my_list.prepend(7)
+    print(str(my_list))
+    my_list.reverse()
+    print(str(my_list))
+
 
 def test_bitvector():
     """

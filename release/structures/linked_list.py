@@ -49,10 +49,9 @@ class DoublyLinkedList:
     """
 
     def __init__(self) -> None:
-        # You probably need to track some data here...
         self._head = None
         self._tail = None
-        self._reversed = False
+        self._reversed = False #flag for if list should act as reversed
         self._size = 0
 
     def __str__(self) -> str:
@@ -61,7 +60,7 @@ class DoublyLinkedList:
         via the str() method.
         """
         rep = "["
-        if not self._reversed:
+        if not self._reversed: #start at head if not reversed, tail otherwise
             curr = self._head
         else:
             curr = self._tail
@@ -70,7 +69,7 @@ class DoublyLinkedList:
                 next_node = curr.get_next()
             else:
                 next_node = curr.get_prev()
-            rep += str(curr.get_data())
+            rep += str(curr.get_data()) #add data of current node and move on in list
             if next_node:
                 rep += ", "
             curr = next_node
@@ -142,7 +141,9 @@ class DoublyLinkedList:
             self._insert_to_front_logical(data)
         else:
             self._insert_to_back_logical(data)
-
+    
+    #inserts to the front of the list as internally stored
+    #looks as if inserting to back if reversed
     def _insert_to_front_logical(self, data: Any) -> None:
         new_head = Node(data)
         self._size +=1
@@ -153,6 +154,8 @@ class DoublyLinkedList:
             self._tail = new_head
         self._head = new_head
 
+
+    #inserts to the back of the list as internally stored
     def _insert_to_back_logical(self, data: Any) -> None:
         new_tail = Node(data)
         self._size +=1

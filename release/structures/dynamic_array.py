@@ -10,7 +10,7 @@ from typing import Any
 class DynamicArray:
     def __init__(self) -> None:
         self._size = 0
-        self._capacity = 1
+        self._capacity = 4 # so that always divisible by 4
         self._elements = [None] * self._capacity
         self._reversed = False
         self._first = None #first and last indexes that are full within the dumb array
@@ -25,21 +25,32 @@ class DynamicArray:
         if not self._reversed: 
             i = self._first
             while i < self._last:
-                rep += self._elements[i]
+                rep += str(self._elements[i])
                 rep += ", "
-            rep += self._elements[self._last]
+                i += 1
+            rep += str(self._elements[self._last])
             rep += "]"
         else:
             i = self._last
             while i > self._first:
-                rep += self._elements[i]
+                rep += str(self._elements[i])
                 rep += ", "
-            rep += self._elements[self._first]
+                i -= 1
+            rep += str(self._elements[self._first])
             rep += "]"
 
+        return rep
+
     def __resize(self) -> None:
-        capacity = capacity * 2
-        self._elements = [None] * capacity / 2 + self._elements + [None] * capacity / 2
+        self._capacity = self._capacity * 2
+        new_elements = [None] * self._capacity
+        for i in range(self._first, self._last + 1): #self._last - self._first + 1 = self._size operations 
+            new_elements[i + self._capacity // 4] = self._elements[i]
+        self._first = self._first + self._capacity // 4
+        self._last = self._last + self._capacity // 4
+        self._elements = new_elements
+        print(self._elements)
+        
 
     def get_at(self, index: int) -> Any | None:
         """
@@ -95,9 +106,10 @@ class DynamicArray:
             self._first = 0
             self._last = 0
             return
-        if self._first == 0:
+        if self.is_full():
             self.__resize()
-        self._elements[self._last + 1] = element
+        self._elements[self._first -1] = element
+        self._first -= 1
 
     def _append_logical(self, element: Any) -> None:
         if self._last == None:
@@ -105,7 +117,7 @@ class DynamicArray:
             self._first = 0
             self._last = 0
             return
-        if self._last + 2 > self._capacity: # if we would place outside of the array
+        if self.is_full():
             self.__resize()
         self._elements[self._last + 1] = element
         self._last += 1
@@ -134,7 +146,11 @@ class DynamicArray:
         If there is no such element, leave the array unchanged.
         Time complexity for full marks: O(N)
         """
-        pass
+        if not self._reversed:
+            i = self._first
+            while i <= self._last:
+                if self._elements[i] == element:
+                    self.remove_at(i - self._size)
 
     def remove_at(self, index: int) -> Any | None:
         """
