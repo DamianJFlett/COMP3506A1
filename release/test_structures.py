@@ -167,19 +167,16 @@ def test_linked_list():
     print(removal.remove_from_front())
     print("removed from front", str(removal))
 
-    
-
-
-
-
-
-
 def test_dynamic_array():
     """
     A simple set of tests for the dynamic array implementation.
     This is not marked and is just here for you to test your code.
     """
     print ("==== Executing Dynamic Array Tests ====")
+
+    my_list = DynamicArray()
+    my_list.append(1)
+    print(str(my_list))
 
 def test_bitvector():
     """

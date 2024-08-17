@@ -13,32 +13,33 @@ class DynamicArray:
         self._capacity = 1
         self._elements = [None] * self._capacity
         self._reversed = False
+        self._first = None #first and last indexes that are full within the dumb array
+        self._last = None 
 
     def __str__(self) -> str:
         """
         A helper that allows you to print a DynamicArray type
         via the str() method.
         """
-        rep = "[]"
-        if not self._reversed: #not right, what about all the noen elements
-            for (index, element) in enumerate(self._elements):
-                rep += element
-                if self._size != index - 1:
-                    rep += ", "
-                else:
-                    rep += "]"
-        else:
-            i = self._size
-            while i > 0:
+        rep = "["
+        if not self._reversed: 
+            i = self._first
+            while i < self._last:
                 rep += self._elements[i]
                 rep += ", "
-                i -= 1
-            rep += self._elements[i]
+            rep += self._elements[self._last]
             rep += "]"
-        return rep
+        else:
+            i = self._last
+            while i > self._first:
+                rep += self._elements[i]
+                rep += ", "
+            rep += self._elements[self._first]
+            rep += "]"
 
     def __resize(self) -> None:
         capacity = capacity * 2
+        self._elements = [None] * capacity / 2 + self._elements + [None] * capacity / 2
 
     def get_at(self, index: int) -> Any | None:
         """
@@ -46,9 +47,10 @@ class DynamicArray:
         Return None if index is out of bounds.
         Time complexity for full marks: O(1)
         """
-        i = 1
         if not self._reversed:
-            pass
+            return self._elements[self._first + index]
+        else:
+            return self._elements[self._last - index]
 
 
     def __getitem__(self, index: int) -> Any | None:
@@ -64,28 +66,60 @@ class DynamicArray:
         Do not modify the list if the index is out of bounds.
         Time complexity for full marks: O(1)
         """
-        pass
+        if not self._reversed:
+            self._elements[index + self._first] = element
+        else:
+            self._elements[self._last - index] = element
 
     def __setitem__(self, index: int, element: Any) -> None:
         """
         Same as set_at.
         Allows to use square brackets to index elements.
         """
-        return self.set_at(index)
+        return self.set_at(index, element)
 
     def append(self, element: Any) -> None:
         """
         Add an element to the back of the array.
         Time complexity for full marks: O(1*) (* means amortized)
         """
-        pass
+        self._size += 1
+        if self._reversed:
+            self._prepend_logical(element)
+        else:
+            self._append_logical(element)
+
+    def _prepend_logical(self, element: Any) -> None:
+        if self._first == None:
+            self._elements[0] = element
+            self._first = 0
+            self._last = 0
+            return
+        if self._first == 0:
+            self.__resize()
+        self._elements[self._last + 1] = element
+
+    def _append_logical(self, element: Any) -> None:
+        if self._last == None:
+            self._elements[0] = element
+            self._first = 0
+            self._last = 0
+            return
+        if self._last + 2 > self._capacity: # if we would place outside of the array
+            self.__resize()
+        self._elements[self._last + 1] = element
+        self._last += 1
 
     def prepend(self, element: Any) -> None:
         """
         Add an element to the front of the array.
         Time complexity for full marks: O(1*)
         """
-        pass
+        self._size += 1
+        if self._reversed:
+            self._append_logical(element)
+        else:
+            self._prepend_logical(element)
 
     def reverse(self) -> None:
         """

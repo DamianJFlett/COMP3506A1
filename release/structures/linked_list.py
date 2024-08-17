@@ -139,11 +139,11 @@ class DoublyLinkedList:
         Time complexity for full marks: O(1)
         """
         if not self._reversed:
-            self.insert_to_front_logical(data)
+            self._insert_to_front_logical(data)
         else:
-            self.insert_to_back_logical(data)
+            self._insert_to_back_logical(data)
 
-    def insert_to_front_logical(self, data: Any) -> None:
+    def _insert_to_front_logical(self, data: Any) -> None:
         new_head = Node(data)
         self._size +=1
         new_head.set_next(self._head)
@@ -153,7 +153,7 @@ class DoublyLinkedList:
             self._tail = new_head
         self._head = new_head
 
-    def insert_to_back_logical(self, data: Any) -> None:
+    def _insert_to_back_logical(self, data: Any) -> None:
         new_tail = Node(data)
         self._size +=1
         new_tail.set_prev(self._tail)
@@ -169,9 +169,9 @@ class DoublyLinkedList:
         Time complexity for full marks: O(1)
         """
         if not self._reversed:
-            self.insert_to_back_logical(data)
+            self._insert_to_back_logical(data)
         else:
-            self.insert_to_front_logical(data)
+            self._insert_to_front_logical(data)
 
 
     def remove_from_front(self) -> Any | None:
@@ -181,9 +181,9 @@ class DoublyLinkedList:
         """
 
         if self._reversed:
-            return self.remove_from_back_logical()
+            return self._remove_from_back_logical()
         else:
-            return self.remove_from_front_logical()
+            return self._remove_from_front_logical()
 
     def remove_from_back(self) -> Any | None:
         """
@@ -195,7 +195,7 @@ class DoublyLinkedList:
         else:
             return self.remove_from_back_logical()
 
-    def remove_from_front_logical(self) -> Any:
+    def _remove_from_front_logical(self) -> Any:
         if not self._head:
             return None
         self._size -= 1
@@ -211,7 +211,7 @@ class DoublyLinkedList:
 
         
 
-    def remove_from_back_logical(self) -> Any:
+    def _remove_from_back_logical(self) -> Any:
         if not self._tail:
             return None
         self._size -= 1
