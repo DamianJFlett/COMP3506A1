@@ -149,16 +149,12 @@ class DynamicArray:
         If there is no such element, leave the array unchanged.
         Time complexity for full marks: O(N)
         """
-        if not self._reversed:
-            i = self._first
-            while i <= self._last:
-                if self._elements[i] == element:
-                    self.remove_at(i - self._size)
-        else:
-            i = self._last
-            while i >= self._first:
-                if self._elements[i] == element:
-                    self.remove_at(i - self._size)
+        i = 0
+        while i <= self._size:
+            if self[i] == element:
+                self.remove_at(i)
+                return
+            i += 1
 
     def remove_at(self, index: int) -> Any | None:
         """

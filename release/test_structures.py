@@ -205,11 +205,14 @@ def test_dynamic_array():
     print("reversed into",str(my_list))
     my_list.remove_at(5)
     print("removed 5th element, now", str(my_list))
+    my_list.remove(4)
+    print("removed 4, list is now", str(my_list))
     my_list.reverse()
     print("reversed", str(my_list))
     my_list.remove_at(5)
-    print("removedat index 5 ", str(my_list))
-
+    print("removedat index 5 ", str(my_list), "size is ", my_list.get_size())
+    my_list.remove(11)
+    print("removed 11, list is now", str(my_list))
 
 def test_bitvector():
     """
