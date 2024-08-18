@@ -213,6 +213,18 @@ def test_dynamic_array():
     print("removedat index 5 ", str(my_list), "size is ", my_list.get_size())
     my_list.remove(11)
     print("removed 11, list is now", str(my_list))
+    my_list.sort()
+    print("sorted, now:", my_list)
+
+    sort_tester = DynamicArray()
+    sort_tester.append(1)
+    sort_tester.append(8)
+    sort_tester.append(5)
+    sort_tester.append(-9)
+    sort_tester.append(2)
+    print("sorter:", str(sort_tester))
+    print("sorted:", str(sort_tester))
+
 
 def test_bitvector():
     """
@@ -221,6 +233,13 @@ def test_bitvector():
     """
     print ("==== Executing Bit Vector Tests ====")
 
+    my_vector = BitVector()
+    my_vector.append(1)
+    print("appended 1", my_vector)
+    my_vector.append(1)
+    print("appended another 1", my_vector)
+    for i in range(0, 62):
+        my_vector.append(1)
 
 
 # The actual program we're running here

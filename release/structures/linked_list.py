@@ -74,9 +74,12 @@ class DoublyLinkedList:
                 rep += ", "
             curr = next_node
         return rep + "]"
+    
+
     """
     Simple Getters and Setters
     """
+    
     def get_size(self) -> int:
         """
         Return the size of the list.

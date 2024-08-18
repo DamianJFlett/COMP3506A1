@@ -5,7 +5,7 @@ Joel Mackenzie and Vladimir Morozov
 """
 
 from typing import Any
-
+import random
 
 class DynamicArray:
     def __init__(self) -> None:
@@ -215,4 +215,41 @@ class DynamicArray:
         Time complexity for full marks: O(NlogN)
         """
         #do without copying to a new array to save space? necessary?
-        pass
+        self._in_place_quick_sort(0, self._size - 1)
+    
+    def _in_place_quick_sort(self, l: int, r: int) -> None:
+        """
+        Modelled on / inspired by pseudocode for in place quick sorting from lectures.
+        Done in-place so as to avoid unnecessary copying of array.
+        """
+        if l >= r:
+            return
+        pivot = random.randint(l, r)
+        left = self._in_place_partition(pivot, l, r)
+        self._in_place_quick_sort(l, left)
+        self._in_place_quick_sort(left, r)    
+
+
+    def _in_place_partition(self, pivot: int, left: int, right: int) -> list[int]:
+        """
+        Partition method for quicksorting, in-place.
+        """ 
+        temp = self[pivot]
+        self[pivot] = self[right]
+        self[right] = temp
+        while left <= right:
+            while self[left] < self[pivot]:
+                left += 1
+            while self[right] > self[pivot]:
+                right -= 1
+            if left <= right:
+                temp = self[right]
+                self[right] = self[left]
+                self[left] = temp
+            left += 1
+            right -= 1
+        return left
+
+
+
+

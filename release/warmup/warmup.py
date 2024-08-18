@@ -83,19 +83,15 @@ def missing_odds(inputs: list[int]) -> int:
     missing_odds([4, 1]) == 3
     missing_odds([4, 1, 8, 5]) == 10    # 3 and 7 are missing
     """
-    #sort first - can this be avoided?
-    running_sum = 0
-    current_min = 0
-    current_max = 0
-    for x in inputs:
-        if x >= current_max:
-            current_max = x
-        elif x <= current_min:
-            current_min = x
-        elif x % 2:
-            running_sum += x
-    
-    def missing_odds_odd_sum_in_interval(a:int,b: int):
+    current_min = inputs[0]
+    current_max = inputs[0]
+    for item in inputs:
+        if item < current_min:
+            current_min = item
+        if item > current_max:
+            current_max = item
+                 
+
         
 
 

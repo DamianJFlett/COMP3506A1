@@ -23,17 +23,17 @@ class BitVector:
         We will use the dynamic array as our data storage mechanism
         """
         self._data = DynamicArray()
-        # you may want or need more stuff here in the constructor
+        self._size = 0
 
     def __str__(self) -> str:
         """
         A helper that allows you to print a BitVector type
         via the str() method.
         """
-        pass
+        return str(self._data)
 
     def __resize(self) -> None:
-        pass
+        self._data.append(0)
 
     def get_at(self, index: int) -> int | None:
         """
@@ -41,14 +41,16 @@ class BitVector:
         Return None if index is out of bounds.
         Time complexity for full marks: O(1)
         """
-        pass
+        if index >= self._size:
+            return None
+        return (self._data.get_at(index // self.BITS_PER_ELEMENT) >> (index % self.BITS_PER_ELEMENT)) & 1
 
     def __getitem__(self, index: int) -> int | None:
         """
         Same as get_at.
         Allows to use square brackets to index elements.
         """
-        pass
+        return self.get_at(index)
 
     def set_at(self, index: int) -> None:
         """
@@ -56,7 +58,10 @@ class BitVector:
         Do not modify the vector if the index is out of bounds.
         Time complexity for full marks: O(1)
         """
-        pass
+        if index >= self._size:
+            return None
+        self._data[index // self.BITS_PER_ELEMENT] = \
+              self._data[index // self.BITS_PER_ELEMENT] | (1 << (index % self.BITS_PER_ELEMENT))
 
     def unset_at(self, index: int) -> None:
         """
@@ -64,7 +69,10 @@ class BitVector:
         Do not modify the vector if the index is out of bounds.
         Time complexity for full marks: O(1)
         """
-        pass
+        if index >= self._size:
+            return None
+        self._data[index // self.BITS_PER_ELEMENT] = \
+              self._data[index // self.BITS_PER_ELEMENT] & ~(1 << (index % self.BITS_PER_ELEMENT))
 
     def __setitem__(self, index: int, state: int) -> None:
         """
@@ -74,7 +82,10 @@ class BitVector:
         Do not modify the vector if the index is out of bounds.
         Time complexity for full marks: O(1)
         """
-        pass
+        if state == 0:
+            self.unset_at(index)
+        else:
+            self.set_at(index)
 
     def append(self, state: int) -> None:
         """
@@ -83,8 +94,19 @@ class BitVector:
         if state is 0, set the bit to 0, otherwise set the bit to 1.
         Time complexity for full marks: O(1*)
         """
-        pass
-
+        self._size += 1
+        if (self._size - 1) % self.BITS_PER_ELEMENT == 0:
+            print('reached', self._size)
+            self.__resize()
+            if state:
+                self._data[self._size // 64] = 1
+            else:
+                self._data[self._size // 64] = 0
+            return
+        self._data[self._size // 64] *= 2
+        if state:
+            self._data[self._size // 64] += 1
+    
     def prepend(self, state: Any) -> None:
         """
         Add a bit to the front of the vector.
