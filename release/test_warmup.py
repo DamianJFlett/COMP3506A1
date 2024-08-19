@@ -22,7 +22,11 @@ def test_main_character():
     """
     print("main_character([1,2,3,4,5]) = ", main_character([1,2,3,4,5]))
     print("main_character([1,2,3,4,4]) = ", main_character([1,2,3,4,4]))
- 
+    print("main_character([1,2,2,4,4]) = ", main_character([1,2,2,4,4]))
+    print("main_character([7, 1, 2, 7]) = ", main_character([7, 1, 2, 7]))
+    my_list = [1, 2, 5, 19, 29, 80, 70]
+    my_list.append(2**28)
+    print("main_character(garbage) = ", main_character(my_list))
 
 def test_missing_odds():
     """
@@ -35,7 +39,8 @@ def test_k_cool():
     A simple set of tests for the k cool problem.
     This is not marked and is just here for you to test your code.
     """
-
+    print("k_cool(3, 10) = ", k_cool(3, 10))
+    print("k_cool(10**30, 10**90000) = ", k_cool(10**10, 10**100000))
 def test_number_game():
     """
     A simple set of tests for the number game problem.

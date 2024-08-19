@@ -278,36 +278,15 @@ def test_bitvector():
     # print(my_vector[127])
 
     bv = BitVector()
-    bv.append(0)
-    bv.append(0)
-    bv.append(0)
-    bv.set_at(1)
-    bv.set_at(2)
-    print(bv)
-    print(bv)
-    bv.unset_at(1)
-    bv.unset_at(2)
-    bv.set_at(0)
-    print(bv)
-    bv.append(1)
-    print(bv)
-    bv.prepend(1)
-    print(bv)
-    bv.prepend(0)
-    print(bv)
-    bv.append(0)
-    print(bv)
-    # for i in range(0, 100):
-    #     if i % 2:
-    #         bv.append(0)
-    #     else:
-    #         bv.append(1)
-    # print(bv)
-    for i in range(0, 100):
-        if i % 2:
-            bv.prepend(0)
-        else:
-            bv.prepend(1)
+    for i in range(0, 40):
+        bv.append(1)
+        bv.append(0)
+    bv[70] = 0
+    bv[0] = 1
+    bv[1] = 1
+    bv[2] = 1
+    bv[3] = 1
+    bv[4] = 1
     print(bv)
 # The actual program we're running here
 if __name__ == "__main__":

@@ -73,7 +73,7 @@ class BitVector:
                 self._data[index // self.BITS_PER_ELEMENT] | (1 << (((self._size - 1) % self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT))
         else:
             self._data[index // self.BITS_PER_ELEMENT] = \
-                self._data[index // self.BITS_PER_ELEMENT] | (1 << ((self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT))
+                self._data[index // self.BITS_PER_ELEMENT] | (1 << (self.BITS_PER_ELEMENT - 1 - index % self.BITS_PER_ELEMENT))
 
     def unset_at(self, index: int) -> None:
         """
@@ -84,11 +84,12 @@ class BitVector:
         if index >= self._size:
             return None
         if index // self.BITS_PER_ELEMENT == self._size //self.BITS_PER_ELEMENT: 
+            print("saw this")
             self._data[index // self.BITS_PER_ELEMENT] = \
                 self._data[index // self.BITS_PER_ELEMENT] & ~(1 << (((self._size - 1) % self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT))
         else:
             self._data[index // self.BITS_PER_ELEMENT] = \
-                self._data[index // self.BITS_PER_ELEMENT] & ~(1 << ((self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT))
+                self._data[index // self.BITS_PER_ELEMENT] & ~(1 << ((self.BITS_PER_ELEMENT - 1 - index) % self.BITS_PER_ELEMENT))
 
     def __setitem__(self, index: int, state: int) -> None:
         """

@@ -1,2 +1,0 @@
-No Generative AI was used in the making of this assignment. 
-All work is my (damian flett) own. Code for in place quick sorting was modelled off of pseudocode from lecture 2.

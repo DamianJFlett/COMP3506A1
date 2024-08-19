@@ -56,11 +56,15 @@ def main_character(instring: list[int]) -> int:
     main_character([60000, 120000, 654321, 999, 1337, 133731337]) == -1
     """
     seen = BitVector()
+    max = 0
     for i in instring:
+        if i > max:
+            max = i
+    for i in range(max + 1):
         seen.append(0)
-    for i in instring:
+    for (index, i) in enumerate(instring):
         if seen[i] == 1:
-            return i
+            return index
         seen[i] = 1
     return -1
 
@@ -119,12 +123,14 @@ def k_cool(k: int, n: int) -> int:
     k_cool(128, 5000) == 9826529652304384 # The actual result is larger than 10^16 + 61,
                                           # so k_cool returns the remainder of division by 10^16 + 61
     """
-
+    #counting in base
+    
     MODULUS = 10**16 + 61
 
     # YOUR CODE GOES HERE
-    answer = 0  # please update with the real answer... :-)
-    #easy way - get all by keeping track of currently available stuff and breaking down as such
+    answer = 0 
+    for i in range(0, n.bit_length()):
+        answer += ((n >> i) & 1)*k**i #k-cool numbers are basically binary representations!?
     return answer % MODULUS
 
 
