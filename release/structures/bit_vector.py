@@ -132,17 +132,22 @@ class BitVector:
         """
         if self._size % self.BITS_PER_ELEMENT == 0:
             self.__resize()
-            if state:
-                self._data[self._size // self.BITS_PER_ELEMENT] = 1
-            else:
-                self._data[self._size // self.BITS_PER_ELEMENT] = 0
-            self._size +=1
-            return
-        if state:
-            self._data[0] = self._data[0] | (1 << self._size % self.BITS_PER_ELEMENT)
-        else:
-            pass
         self._size += 1
+        if state:
+            self[0] = 1
+        else:
+            self[0] = 0
+
+    def _right_shift(self, array: list[int]) -> list[int]:
+        """
+        Shifts the entire array 1 bit to the right and isnerts teh start insert at the left
+        """
+        start = 0
+        for i in range(self._data.get_size()-1, -1, -1):
+            carry = array[i] & 1
+            array[i] = (array[i] >> 1) | (start << (self.BITS_PER_ELEMENT -1))
+            start = carry
+        return array
 
     def reverse(self) -> None:
         """

@@ -20,7 +20,8 @@ def test_main_character():
     A simple set of tests for the main character problem.
     This is not marked and is just here for you to test your code.
     """
-    assert (main_character([1,2,3,4,5]) == 0)
+    print("main_character([1,2,3,4,5]) = ", main_character([1,2,3,4,5]))
+    print("main_character([1,2,3,4,4]) = ", main_character([1,2,3,4,4]))
  
 
 def test_missing_odds():

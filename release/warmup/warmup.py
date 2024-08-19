@@ -55,8 +55,14 @@ def main_character(instring: list[int]) -> int:
     main_character([7, 1, 2, 7]) == 3
     main_character([60000, 120000, 654321, 999, 1337, 133731337]) == -1
     """
-    #hash - keep track of current numbers with something like a hashset
-    pass
+    seen = BitVector()
+    for i in instring:
+        seen.append(0)
+    for i in instring:
+        if seen[i] == 1:
+            return i
+        seen[i] = 1
+    return -1
 
 def missing_odds(inputs: list[int]) -> int:
     """
@@ -83,14 +89,7 @@ def missing_odds(inputs: list[int]) -> int:
     missing_odds([4, 1]) == 3
     missing_odds([4, 1, 8, 5]) == 10    # 3 and 7 are missing
     """
-    current_min = inputs[0]
-    current_max = inputs[0]
-    for item in inputs:
-        if item < current_min:
-            current_min = item
-        if item > current_max:
-            current_max = item
-                 
+    pass
 
         
 

@@ -284,11 +284,31 @@ def test_bitvector():
     bv.set_at(1)
     bv.set_at(2)
     print(bv)
+    print(bv)
     bv.unset_at(1)
     bv.unset_at(2)
     bv.set_at(0)
     print(bv)
-
+    bv.append(1)
+    print(bv)
+    bv.prepend(1)
+    print(bv)
+    bv.prepend(0)
+    print(bv)
+    bv.append(0)
+    print(bv)
+    # for i in range(0, 100):
+    #     if i % 2:
+    #         bv.append(0)
+    #     else:
+    #         bv.append(1)
+    # print(bv)
+    for i in range(0, 100):
+        if i % 2:
+            bv.prepend(0)
+        else:
+            bv.prepend(1)
+    print(bv)
 # The actual program we're running here
 if __name__ == "__main__":
     # Get and parse the command line arguments
