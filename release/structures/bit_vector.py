@@ -31,7 +31,7 @@ class BitVector:
         via the str() method.
         """
         rep = ""
-        for i in range(self._size):
+        for i in range(0,self._size):
             if not (i % self.BITS_PER_ELEMENT):
                 rep += " "
             rep += str(self[i])
@@ -48,8 +48,11 @@ class BitVector:
         """
         if index >= self._size:
             return None
-        return (self._data.get_at(index // self.BITS_PER_ELEMENT) >> (index % self.BITS_PER_ELEMENT)) & 1
-
+        if index // self.BITS_PER_ELEMENT == self._size //self.BITS_PER_ELEMENT:  
+            return (self._data[index // self.BITS_PER_ELEMENT] >> (((self._size-1) % self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT)) & 1
+        else:
+            return (self._data[index // self.BITS_PER_ELEMENT] >> ((self.BITS_PER_ELEMENT -1 - index % self.BITS_PER_ELEMENT))) & 1
+    
     def __getitem__(self, index: int) -> int | None:
         """
         Same as get_at.
@@ -65,8 +68,12 @@ class BitVector:
         """
         if index >= self._size:
             return None
-        self._data[index // self.BITS_PER_ELEMENT] = \
-              self._data[index // self.BITS_PER_ELEMENT] | (1 << (index % self.BITS_PER_ELEMENT))
+        if index // self.BITS_PER_ELEMENT == self._size //self.BITS_PER_ELEMENT: 
+            self._data[index // self.BITS_PER_ELEMENT] = \
+                self._data[index // self.BITS_PER_ELEMENT] | (1 << (((self._size - 1) % self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT))
+        else:
+            self._data[index // self.BITS_PER_ELEMENT] = \
+                self._data[index // self.BITS_PER_ELEMENT] | (1 << ((self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT))
 
     def unset_at(self, index: int) -> None:
         """
@@ -76,8 +83,12 @@ class BitVector:
         """
         if index >= self._size:
             return None
-        self._data[index // self.BITS_PER_ELEMENT] = \
-              self._data[index // self.BITS_PER_ELEMENT] & ~(1 << (index % self.BITS_PER_ELEMENT))
+        if index // self.BITS_PER_ELEMENT == self._size //self.BITS_PER_ELEMENT: 
+            self._data[index // self.BITS_PER_ELEMENT] = \
+                self._data[index // self.BITS_PER_ELEMENT] & ~(1 << (((self._size - 1) % self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT))
+        else:
+            self._data[index // self.BITS_PER_ELEMENT] = \
+                self._data[index // self.BITS_PER_ELEMENT] & ~(1 << ((self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT))
 
     def __setitem__(self, index: int, state: int) -> None:
         """
@@ -102,14 +113,14 @@ class BitVector:
         if self._size % self.BITS_PER_ELEMENT == 0:
             self.__resize()
             if state:
-                self._data[self._size // 64] = 1
+                self._data[self._size // self.BITS_PER_ELEMENT] = 1
             else:
-                self._data[self._size // 64] = 0
+                self._data[self._size // self.BITS_PER_ELEMENT] = 0
             self._size +=1
             return
-        self._data[self._size // 64] *= 2
+        self._data[self._size // self.BITS_PER_ELEMENT] *= 2
         if state:
-            self._data[self._size // 64] += 1
+            self._data[self._size // self.BITS_PER_ELEMENT] += 1
         self._size += 1
     
     def prepend(self, state: Any) -> None:
@@ -122,13 +133,13 @@ class BitVector:
         if self._size % self.BITS_PER_ELEMENT == 0:
             self.__resize()
             if state:
-                self._data[self._size // 64] = 1
+                self._data[self._size // self.BITS_PER_ELEMENT] = 1
             else:
-                self._data[self._size // 64] = 0
+                self._data[self._size // self.BITS_PER_ELEMENT] = 0
             self._size +=1
             return
         if state:
-            self._data[0] = self._data[0] | (1<<self._size % self.BITS_PER_ELEMENT)
+            self._data[0] = self._data[0] | (1 << self._size % self.BITS_PER_ELEMENT)
         else:
             pass
         self._size += 1
@@ -169,3 +180,4 @@ class BitVector:
         Time complexity for full marks: O(1)
         """
         return self._size
+    
