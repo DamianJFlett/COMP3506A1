@@ -249,7 +249,20 @@ def test_bitvector():
     for i in range(0, 63):
         my_vector.append(0)
     print("appended 63 0's, now: ", my_vector)
-
+    my_vector[0] = 0
+    print("set first bit to 0, now", my_vector)
+    my_vector.prepend(0)
+    print("prepended a 0 ", my_vector)
+    my_vector.prepend(0)
+    print("prepended a 0 ", my_vector)
+    print(my_vector._data)
+    print(my_vector[0])
+    print(my_vector[1])
+    print(my_vector[2])
+    print(my_vector[130])
+    print(my_vector[129])
+    print(my_vector[128])
+    print(my_vector[127])
 
 # The actual program we're running here
 if __name__ == "__main__":

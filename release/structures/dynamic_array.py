@@ -111,7 +111,7 @@ class DynamicArray:
             return
         if self.is_full() or self._first - 1 <= 0:
             self.__resize()
-        self._elements[self._first -1] = element
+        self._elements[self._first - 1] = element
         self._first -= 1
 
     def _append_logical(self, element: Any) -> None:

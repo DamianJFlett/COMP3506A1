@@ -30,8 +30,13 @@ class BitVector:
         A helper that allows you to print a BitVector type
         via the str() method.
         """
-        return str(self._data)
-
+        rep = ""
+        for i in range(self._size):
+            if not (i % self.BITS_PER_ELEMENT):
+                rep += " "
+            rep += str(self[i])
+        return rep
+    
     def __resize(self) -> None:
         self._data.append(0)
 
@@ -114,7 +119,19 @@ class BitVector:
         if state is 0, set the bit to 0, otherwise set the bit to 1.
         Time complexity for full marks: O(1*)
         """
-        pass
+        if self._size % self.BITS_PER_ELEMENT == 0:
+            self.__resize()
+            if state:
+                self._data[self._size // 64] = 1
+            else:
+                self._data[self._size // 64] = 0
+            self._size +=1
+            return
+        if state:
+            self._data[0] = self._data[0] | (1<<self._size % self.BITS_PER_ELEMENT)
+        else:
+            pass
+        self._size += 1
 
     def reverse(self) -> None:
         """
