@@ -123,15 +123,18 @@ def k_cool(k: int, n: int) -> int:
     k_cool(128, 5000) == 9826529652304384 # The actual result is larger than 10^16 + 61,
                                           # so k_cool returns the remainder of division by 10^16 + 61
     """
-    #counting in base
+    #counting in base 2
     
     MODULUS = 10**16 + 61
 
-    # YOUR CODE GOES HERE
+    # maybe use a bitvector somehow
     answer = 0 
+    current_term = 1
     for i in range(0, n.bit_length()):
-        answer += ((n >> i) & 1)*k**i #k-cool numbers are basically binary representations!?
-    return answer % MODULUS
+        if (n >> i) & 1:
+            answer += current_term % MODULUS
+        current_term = (current_term % MODULUS) * k
+    return answer
 
 
 def number_game(numbers: list[int]) -> tuple[str, int]:
@@ -168,7 +171,7 @@ def number_game(numbers: list[int]) -> tuple[str, int]:
     So, nobody picks any numbers to increase their score, which results in a Tie with both players having scores of 0.
     """
 
-    # YOUR CODE GOES HERE
+    # they want to maximise score difference
     pass
 
 

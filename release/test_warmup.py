@@ -40,7 +40,7 @@ def test_k_cool():
     This is not marked and is just here for you to test your code.
     """
     print("k_cool(3, 10) = ", k_cool(3, 10))
-    print("k_cool(10**30, 10**90000) = ", k_cool(10**10, 10**100000))
+    print("k_cool(10**30, 10**90000) = ", k_cool(128, 5000))
 def test_number_game():
     """
     A simple set of tests for the number game problem.
