@@ -94,18 +94,18 @@ class BitVector:
         if state is 0, set the bit to 0, otherwise set the bit to 1.
         Time complexity for full marks: O(1*)
         """
-        self._size += 1
-        if (self._size - 1) % self.BITS_PER_ELEMENT == 0:
-            print('reached', self._size)
+        if self._size % self.BITS_PER_ELEMENT == 0:
             self.__resize()
             if state:
                 self._data[self._size // 64] = 1
             else:
                 self._data[self._size // 64] = 0
+            self._size +=1
             return
         self._data[self._size // 64] *= 2
         if state:
             self._data[self._size // 64] += 1
+        self._size += 1
     
     def prepend(self, state: Any) -> None:
         """
@@ -151,4 +151,4 @@ class BitVector:
         Return the number of *bits* in the list
         Time complexity for full marks: O(1)
         """
-        pass
+        return self._size

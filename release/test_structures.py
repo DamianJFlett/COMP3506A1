@@ -238,8 +238,17 @@ def test_bitvector():
     print("appended 1", my_vector)
     my_vector.append(1)
     print("appended another 1", my_vector)
+    print("appending 62 1's")
     for i in range(0, 62):
         my_vector.append(1)
+    print("currently ", my_vector)
+    my_vector.append(1)
+    print("appended another 1 ", my_vector)
+    my_vector.append(0)
+    print("appended 0 ", my_vector)
+    for i in range(0, 63):
+        my_vector.append(0)
+    print("appended 63 0's, now: ", my_vector)
 
 
 # The actual program we're running here
