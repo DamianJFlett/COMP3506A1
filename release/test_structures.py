@@ -287,7 +287,9 @@ def test_bitvector():
     bv[2] = 1
     bv[3] = 1
     bv[4] = 1
+    bv.prepend(0)
     print(bv)
+    print(bv._data)
 # The actual program we're running here
 if __name__ == "__main__":
     # Get and parse the command line arguments

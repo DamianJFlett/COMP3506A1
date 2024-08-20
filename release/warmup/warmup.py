@@ -65,7 +65,7 @@ def main_character(instring: list[int]) -> int:
     for (index, i) in enumerate(instring):
         if seen[i] == 1:
             return index
-        seen[i] = 1
+        seen.set_at(i)
     return -1
 
 def missing_odds(inputs: list[int]) -> int:
@@ -123,18 +123,17 @@ def k_cool(k: int, n: int) -> int:
     k_cool(128, 5000) == 9826529652304384 # The actual result is larger than 10^16 + 61,
                                           # so k_cool returns the remainder of division by 10^16 + 61
     """
-    #counting in base 2
-    
+    #looks like these map onto binary numbers
     MODULUS = 10**16 + 61
 
-    # maybe use a bitvector somehow
     answer = 0 
     current_term = 1
     for i in range(0, n.bit_length()):
         if (n >> i) & 1:
-            answer += current_term % MODULUS
-        current_term = (current_term % MODULUS) * k
-    return answer
+            answer += current_term % MODULUS #  modulus at every step so adding and multiplying
+        current_term = (current_term % MODULUS) * k #  operations dont get out of hand with many digits
+    return answer % MODULUS
+
 
 
 def number_game(numbers: list[int]) -> tuple[str, int]:

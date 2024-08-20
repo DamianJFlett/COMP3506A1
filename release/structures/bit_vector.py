@@ -84,7 +84,6 @@ class BitVector:
         if index >= self._size:
             return None
         if index // self.BITS_PER_ELEMENT == self._size //self.BITS_PER_ELEMENT: 
-            print("saw this")
             self._data[index // self.BITS_PER_ELEMENT] = \
                 self._data[index // self.BITS_PER_ELEMENT] & ~(1 << (((self._size - 1) % self.BITS_PER_ELEMENT - index) % self.BITS_PER_ELEMENT))
         else:
@@ -113,10 +112,7 @@ class BitVector:
         """
         if self._size % self.BITS_PER_ELEMENT == 0:
             self.__resize()
-            if state:
-                self._data[self._size // self.BITS_PER_ELEMENT] = 1
-            else:
-                self._data[self._size // self.BITS_PER_ELEMENT] = 0
+            self._data[self._size // self.BITS_PER_ELEMENT] = state
             self._size +=1
             return
         self._data[self._size // self.BITS_PER_ELEMENT] *= 2
@@ -134,10 +130,7 @@ class BitVector:
         if self._size % self.BITS_PER_ELEMENT == 0:
             self.__resize()
         self._size += 1
-        if state:
-            self[0] = 1
-        else:
-            self[0] = 0
+        self[0] = state
 
     def _right_shift(self, array: list[int]) -> list[int]:
         """
