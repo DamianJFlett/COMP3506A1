@@ -143,6 +143,9 @@ class BitVector:
             start = carry
         return array
 
+    def pre_allocate(self, size: int) -> None:
+        self._data = [0] * size
+
     def reverse(self) -> None:
         """
         Reverse the bit-vector.

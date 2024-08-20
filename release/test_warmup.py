@@ -25,7 +25,7 @@ def test_main_character():
     print("main_character([1,2,2,4,4]) = ", main_character([1,2,2,4,4]))
     print("main_character([7, 1, 2, 7]) = ", main_character([7, 1, 2, 7]))
     my_list = [1, 2, 5, 19, 29, 80, 70]
-    my_list.append(2**28)
+    my_list.append(2**32)
     print("main_character(garbage) = ", main_character(my_list))
 
 def test_missing_odds():

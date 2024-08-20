@@ -60,8 +60,7 @@ def main_character(instring: list[int]) -> int:
     for i in instring:
         if i > max:
             max = i
-    for i in range(max + 1):
-        seen.append(0)
+        seen.pre_allocate(max+1)
     for (index, i) in enumerate(instring):
         if seen[i] == 1:
             return index
