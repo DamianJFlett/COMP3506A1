@@ -95,7 +95,6 @@ def missing_odds(inputs: list[int]) -> int:
     running_total = 0
     min = inputs[0]
     max = inputs[0]
-    size = 0
     for i in inputs:
         if i < min:
             min = i
@@ -103,18 +102,26 @@ def missing_odds(inputs: list[int]) -> int:
             max = i
         if i % 2:
             running_total += i
-            size += 1
-
-    if not ((min - max) % 2) and (min % 2):
-        return ((size - 2)/ 2 ) * (min + max) - running_total
-    elif  not ((min - max) % 2):
-        return ((size)/ 2 ) * (min + max) - running_total
-    elif (min - max) % 2:
-        pass
+    if min % 2:
+        running_total -= min
+    if max % 2:
+        running_total -= max
+    size = _count_odds(min, max)
+    print(size, min, max, running_total)
+    if not min % 2 and max % 2:
+        return (size/ 2 ) * (min + max) - running_total
+    elif  not (min % 2 or max % 2):
+        return size/ 2  * (min + max) - running_total
+    elif min % 2 and not (max % 2):
+        return (size/ 2 ) * (min + max+1) - running_total
     else:
-        pass
+        return (size/ 2) * (min + max-1) - running_total
         
-
+def _count_odds(min: int, max: int) -> int:
+    if min % 2 and max % 2:
+        return (max - min) // 2 - 1 
+    else:
+        return (max - min) // 2 
 
 def k_cool(k: int, n: int) -> int:
     """

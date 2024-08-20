@@ -40,7 +40,11 @@ def test_missing_odds():
     A simple set of tests for the missing odds problem.
     This is not marked and is just here for you to test your code.
     """
-
+    print("missing_odds([1, 2]) = ",  missing_odds([1, 2]))
+    print("missing_odds([1, 3]) = ", missing_odds([1,3]))
+    print("missing_odds([1,4]) =", missing_odds([1,4]))
+    print("missing_odds([4,1]) = ", missing_odds([4,1]))
+    print("missing_odds([4,1,8,5]) = ", missing_odds([4,1,8,5]))
 def test_k_cool():
     """
     A simple set of tests for the k cool problem.
