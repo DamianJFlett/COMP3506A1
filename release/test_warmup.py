@@ -45,6 +45,11 @@ def test_missing_odds():
     print("missing_odds([1,4]) =", missing_odds([1,4]))
     print("missing_odds([4,1]) = ", missing_odds([4,1]))
     print("missing_odds([4,1,8,5]) = ", missing_odds([4,1,8,5]))
+    my_list = []
+    for i in range(1, 300000):
+        my_list.append(i)
+    print("missing odds garbage", missing_odds(my_list))
+    print("missing odds([1,3,5,7,11,15]) = ",missing_odds([1,3,5,7,11,15]))
 def test_k_cool():
     """
     A simple set of tests for the k cool problem.
