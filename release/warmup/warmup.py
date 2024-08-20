@@ -62,7 +62,7 @@ def main_character(instring: list[int]) -> int:
             max = i
         seen.pre_allocate(max+1)
     for (index, i) in enumerate(instring):
-        if seen[i] == 1:
+        if seen[i]:
             return index
         seen.set_at(i)
     return -1
@@ -71,7 +71,7 @@ def missing_odds(inputs: list[int]) -> int:
     """
     @inputs@ is an unordered array of distinct integers.
     If @a@ is the smallest number in the array and @b@ is the biggest,
-    return the sum of odd numbers in the interval [a, b] that are not present in @inputs@.
+    return the sum of odd numbers in the interval [a, b] that are not present in @inputs@
     If there are no such numbers, return 0.
 
     Limitations:
@@ -92,8 +92,27 @@ def missing_odds(inputs: list[int]) -> int:
     missing_odds([4, 1]) == 3
     missing_odds([4, 1, 8, 5]) == 10    # 3 and 7 are missing
     """
-    pass
+    running_total = 0
+    min = inputs[0]
+    max = inputs[0]
+    size = 0
+    for i in inputs:
+        if i < min:
+            min = i
+        if i > max:
+            max = i
+        if i % 2:
+            running_total += i
+            size += 1
 
+    if not ((min - max) % 2) and (min % 2):
+        return ((size - 2)/ 2 ) * (min + max) - running_total
+    elif  not ((min - max) % 2):
+        return ((size)/ 2 ) * (min + max) - running_total
+    elif (min - max) % 2:
+        pass
+    else:
+        pass
         
 
 
@@ -201,6 +220,11 @@ def road_illumination(road_length: int, poles: list[int]) -> float:
     road_illumination(5, [2, 5]) == 2.0
     """
 
-    pass
-    #start by sorting? then minimum size needed can be determined by iterating through the list and checking
-    #if it covers - Current cover after iterating through is this, do we need better to illuminate here
+    #consecutive pairs in the list distance x away need 2x minimum to illuminate
+    #bucket sort ?? 
+    #maybe ??
+    current_rad = 0
+    for i in poles:
+        pass
+         
+

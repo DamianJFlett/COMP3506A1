@@ -27,6 +27,13 @@ def test_main_character():
     my_list = [1, 2, 5, 19, 29, 80, 70]
     my_list.append(2**32)
     print("main_character(garbage) = ", main_character(my_list))
+    print("main_character([1,2,1,4,4,4]) = ", main_character([1,2,1,4,4,4]))
+    list2 = []
+    for i in range(10000):
+        list2.append(i**2)
+    list2.append(2**32)
+    print("finished")
+    print("main charcter big list = ", main_character(list2))
 
 def test_missing_odds():
     """

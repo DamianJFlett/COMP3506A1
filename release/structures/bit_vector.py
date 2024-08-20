@@ -144,7 +144,8 @@ class BitVector:
         return array
 
     def pre_allocate(self, size: int) -> None:
-        self._data = [0] * size
+        self._size = size
+        self._data = [0] * (size // 64 + 1)
 
     def reverse(self) -> None:
         """
