@@ -209,22 +209,23 @@ class DynamicArray:
 
     def _in_place_quick_sort(self, left:int, right: int) -> list[int]:
         """
-        Sorts the list inlist into descending order recursively and in-place via quicksort
+        Sorts the list inlist into ascending order recursively and in-place via quicksort.
+        Initially hard to do in place, then done for alice and bob's game, and adapted for dynamic list. 
         """
         if left >= right:
             return
         pivot = randint(left, right)
         h = self._partition(left, right, pivot)
-        self._in_place_quick_sort(left, h -1)
+        self._in_place_quick_sort(left, h -1) 
         self._in_place_quick_sort(h + 1, right)
 
     def _partition(self: list[int], left: int, right: int, pivot: int) -> int:
-        self[pivot], self[left] = self[left], self[pivot]
-        at_pivot = self[left]
-        left_index = left + 1
+        self[pivot], self[left] = self[left], self[pivot] # put pivot at left of array
+        at_pivot = self[left] # the data at the pivot
+        left_index = left + 1 # current pointer, so we can not modify left to use it later
         for i in range(left + 1, right + 1):
             if self[i] < at_pivot:
-                self[i], self[left_index] = self[left_index], self[i]
+                self[i], self[left_index] = self[left_index], self[i] # if on the wrong side of pivot, swap
                 left_index += 1
         self[left], self[left_index - 1] = self[left_index - 1], self[left]
         return left_index - 1

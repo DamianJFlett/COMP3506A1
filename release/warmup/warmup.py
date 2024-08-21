@@ -228,11 +228,11 @@ def _reverse_sort(inlist: list[int], left:int, right: int) -> list[int]:
 
 def _reverse_partition(inlist: list[int], left: int, right: int, pivot: int) -> int:
     inlist[pivot], inlist[left] = inlist[left], inlist[pivot]
-    at_pivot = inlist[left]
-    left_index = left + 1
+    at_pivot = inlist[left] # data at the pivot 
+    left_index = left + 1 # pointer to left index, so we dont change left, to be used later
     for i in range(left + 1, right + 1):
         if inlist[i] > at_pivot:
-            inlist[i], inlist[left_index] = inlist[left_index], inlist[i]
+            inlist[i], inlist[left_index] = inlist[left_index], inlist[i] # swap if we found on wrong side of pointer
             left_index += 1
     inlist[left], inlist[left_index - 1] = inlist[left_index - 1], inlist[left]
     return left_index - 1
@@ -266,19 +266,34 @@ def road_illumination(road_length: int, poles: list[int]) -> float:
     """
 
     #consecutive pairs in the list distance x away need 2x minimum to illuminate
-    #bucket sort ?? 
     #maybe ??
     current_rad = 0
-    min = poles[0]
-    max = poles[0]
-    for i in poles:
-        if i < min:
-            min = i
-        if i > max:
-            max = i
+    poles = _sort(poles, 0, len(poles) -1))
+    for (index, i) in enumerate(poles):
+        if i 
 
-    num_poles = len(poles)
-    for i in poles:
-        pass
-         
+
+
+#  how op is not being marked on style i can just copy 20 lines of code
+def _sort(inlist: list[int], left:int, right: int) -> list[int]:
+    """
+    Sorts the list inlist into descending order recursively and in-place via quicksort
+    """
+    if left >= right:
+        return
+    pivot = randint(left, right)
+    h = _reverse_partition(inlist, left, right, pivot)
+    _reverse_sort(inlist, left, h -1)
+    _reverse_sort(inlist, h + 1, right)
+
+def _partition(inlist: list[int], left: int, right: int, pivot: int) -> int:
+    inlist[pivot], inlist[left] = inlist[left], inlist[pivot]
+    at_pivot = inlist[left] # data at the pivot 
+    left_index = left + 1 # pointer to left index, so we dont change left, to be used later
+    for i in range(left + 1, right + 1):
+        if inlist[i] < at_pivot:
+            inlist[i], inlist[left_index] = inlist[left_index], inlist[i] # swap if we found on wrong side of pointer
+            left_index += 1
+    inlist[left], inlist[left_index - 1] = inlist[left_index - 1], inlist[left]
+    return left_index - 1
 
