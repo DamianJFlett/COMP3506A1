@@ -4,7 +4,7 @@ The University of Queensland
 Joel Mackenzie and Vladimir Morozov
 """
 
-# so we can hint Node get_next
+#  so we can hint Node get_next
 from __future__ import annotations
 
 from typing import Any

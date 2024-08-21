@@ -92,7 +92,7 @@ def missing_odds(inputs: list[int]) -> int:
     missing_odds([4, 1]) == 3
     missing_odds([4, 1, 8, 5]) == 10    # 3 and 7 are missing
     """
-    running_total = 0 #  odd numbers present in (min, max)
+    running_total = 0 #  sum of odd numbers present in (min, max)
     min = inputs[0]
     max = inputs[0]
     for i in inputs:
@@ -109,13 +109,13 @@ def missing_odds(inputs: list[int]) -> int:
     size = _count_odds(min, max) 
     print(size, min, max, running_total)
     if min % 2 and max % 2:
-        return (size/ 2 ) * (min + max) - running_total
+        return int((size / 2 ) * (min + max) - running_total)
     elif  not (min % 2 or max % 2):
-        return size/ 2  * (min + max) - running_total
+        return int(size / 2  * (min + max) - running_total)
     elif min % 2 and not (max % 2):
-        return (size/ 2 ) * (min + max+1) - running_total
+        return int((size / 2 ) * (min + max+1) - running_total)
     else:
-        return (size/ 2) * (min + max-1) - running_total
+        return int((size / 2) * (min + max-1) - running_total)
         
 def _count_odds(min: int, max: int) -> int:
     """
