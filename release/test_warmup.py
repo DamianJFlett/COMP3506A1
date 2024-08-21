@@ -62,6 +62,8 @@ def test_number_game():
     A simple set of tests for the number game problem.
     This is not marked and is just here for you to test your code.
     """
+    print("number_game([5, 2, 7,3]) = ", number_game([5,2,7,3]))
+    print("number_game([1,8 ,5, -9,2]) = ", number_game([1,8,5,-9,2]))
 
 def test_road_illumination():
     """

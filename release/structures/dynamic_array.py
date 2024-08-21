@@ -5,7 +5,7 @@ Joel Mackenzie and Vladimir Morozov
 """
 
 from typing import Any
-import random
+from random import randint
 
 class DynamicArray:
     def __init__(self) -> None:
@@ -216,40 +216,28 @@ class DynamicArray:
         """
         #do without copying to a new array to save space? necessary?
         self._in_place_quick_sort(0, self._size - 1)
-    
-    def _in_place_quick_sort(self, l: int, r: int) -> None:
+
+    def _in_place_quick_sort(self, left:int, right: int) -> list[int]:
         """
-        Modelled on / inspired by pseudocode for in place quick sorting from lectures.
-        Done in-place so as to avoid unnecessary copying of array.
+        Sorts the list list into descending order recursively and in-place via quicksort
         """
-        if l >= r:
+        if left > right:
             return
-        pivot = random.randint(l, r)
-        left = self._in_place_partition(pivot, l, r)
-        self._in_place_quick_sort(l, left)
-        self._in_place_quick_sort(left, r)    
+        pivot = randint(left, right)
+        h = self._reverse_partition(left, right, pivot)
+        self._in_place_quick_sort(left, h - 1)
+        self._in_place_quick_sort(h + 1, right)
 
-
-    def _in_place_partition(self, pivot: int, left: int, right: int) -> list[int]:
-        """
-        Partition method for quicksorting, in-place.
-        """ 
-        temp = self[pivot]
-        self[pivot] = self[right]
-        self[right] = temp
-        while left <= right:
-            while self[left] < self[pivot]:
+    def _reverse_partition(self, left: int, right: int, pivot: int) -> int:
+        print(left,right, pivot)
+        self[pivot], self[left] = self[left], self[pivot]
+        for i in range(left + 1, right + 1):
+            if self[i] <= self[pivot]:
+                self[i], self[left + 1] = self[left + 1], self[i]
                 left += 1
-            while self[right] > self[pivot]:
-                right -= 1
-            if left <= right:
-                temp = self[right]
-                self[right] = self[left]
-                self[left] = temp
-            left += 1
-            right -= 1
-        return left
-
+        self[pivot], self[left] = self[left], self[pivot]
+        pivot = left
+        return pivot
 
 
 

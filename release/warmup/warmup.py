@@ -31,7 +31,7 @@ problems. Or maybe not. We did it for you just in case.
 from structures.bit_vector import BitVector
 from structures.dynamic_array import DynamicArray
 from structures.linked_list import DoublyLinkedList, Node
-
+from random import randint
 
 def main_character(instring: list[int]) -> int:
     """
@@ -197,9 +197,44 @@ def number_game(numbers: list[int]) -> tuple[str, int]:
     So, nobody picks any numbers to increase their score, which results in a Tie with both players having scores of 0.
     """
 
-    # they want to maximise score difference
-    pass
+    # bob and alice just pick the biggest number they can see, bigger number = better person
+    _reverse_sort(numbers, 0, len(numbers) - 1)
+    print(numbers)
+    bob_score = 0
+    alice_score = 0
+    for (index, i) in enumerate(numbers): 
+        if not (index % 2) and not (i % 2):
+            alice_score += i
+        elif (index % 2) and (i % 2):
+            bob_score += i
+    if alice_score > bob_score:
+        return ("Alice", alice_score)
+    elif bob_score > alice_score:
+        return ("Bob",bob_score)
+    else:
+        return("Tie",bob_score)
 
+def _reverse_sort(inlist: list[int], left:int, right: int) -> list[int]:
+    """
+    Sorts the list inlist into descending order recursively and in-place via quicksort
+    """
+    if left > right:
+        return
+    pivot = randint(left, right)
+    h = _reverse_partition(inlist, left, right, pivot)
+    _reverse_sort(inlist, left, h - 1)
+    _reverse_sort(inlist, h + 1, right)
+
+def _reverse_partition(inlist: list[int], left: int, right: int, pivot: int) -> int:
+    inlist[pivot], inlist[left] = inlist[left], inlist[pivot]
+    for i in range(left + 1, right + 1):
+        if inlist[i] >= inlist[pivot]:
+            print(inlist[i], inlist[pivot])
+            inlist[i], inlist[left + 1] = inlist[left + 1], inlist[i]
+            left += 1
+    inlist[pivot], inlist[left] = inlist[left], inlist[pivot]
+    pivot = left
+    return pivot
 
 def road_illumination(road_length: int, poles: list[int]) -> float:
     """

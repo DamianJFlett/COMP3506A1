@@ -222,10 +222,11 @@ def test_dynamic_array():
     sort_tester.append(5)
     sort_tester.append(-9)
     sort_tester.append(2)
+    print(sort_tester._first, sort_tester._last)
     print("sorter:", str(sort_tester))
+    sort_tester.sort()
     print("sorted:", str(sort_tester))
-
-
+    
 def test_bitvector():
     """
     A simple set of tests for the bit vector implementation.
