@@ -107,15 +107,14 @@ def missing_odds(inputs: list[int]) -> int:
     if max % 2:
         running_total -= max
     size = _count_odds(min, max) 
-    print(size, min, max, running_total)
     if min % 2 and max % 2:
-        return int((size / 2 ) * (min + max) - running_total)
+        return (size * (min + max)) // 2 - running_total
     elif  not (min % 2 or max % 2):
-        return int(size / 2  * (min + max) - running_total)
+        return (size * (min + max)) // 2 - running_total
     elif min % 2 and not (max % 2):
-        return int((size / 2 ) * (min + max+1) - running_total)
+        return (size * (min + max+1)) // 2 - running_total
     else:
-        return int((size / 2) * (min + max-1) - running_total)
+        return (size * (min + max-1)) // 2 - running_total
         
 def _count_odds(min: int, max: int) -> int:
     """
@@ -234,6 +233,15 @@ def road_illumination(road_length: int, poles: list[int]) -> float:
     #bucket sort ?? 
     #maybe ??
     current_rad = 0
+    min = poles[0]
+    max = poles[0]
+    for i in poles:
+        if i < min:
+            min = i
+        if i > max:
+            max = i
+
+    num_poles = len(poles)
     for i in poles:
         pass
          
