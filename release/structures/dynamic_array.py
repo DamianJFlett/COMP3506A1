@@ -209,25 +209,25 @@ class DynamicArray:
 
     def _in_place_quick_sort(self, left:int, right: int) -> list[int]:
         """
-        Sorts the list list into descending order recursively and in-place via quicksort
+        Sorts the list inlist into descending order recursively and in-place via quicksort
         """
         if left >= right:
             return
         pivot = randint(left, right)
-        h = self._reverse_partition(left, right, pivot)
-        self._in_place_quick_sort(left, h - 1)
+        h = self._partition(left, right, pivot)
+        self._in_place_quick_sort(left, h -1)
         self._in_place_quick_sort(h + 1, right)
 
-    def _reverse_partition(self, left: int, right: int, pivot: int) -> int:
-        print(left,right, pivot)
+    def _partition(self: list[int], left: int, right: int, pivot: int) -> int:
         self[pivot], self[left] = self[left], self[pivot]
+        at_pivot = self[left]
+        left_index = left + 1
         for i in range(left + 1, right + 1):
-            if self[i] <= self[pivot]:
-                self[i], self[left + 1] = self[left + 1], self[i]
-                left += 1
-        self[pivot], self[left] = self[left], self[pivot]
-        pivot = left
-        return pivot
+            if self[i] < at_pivot:
+                self[i], self[left_index] = self[left_index], self[i]
+                left_index += 1
+        self[left], self[left_index - 1] = self[left_index - 1], self[left]
+        return left_index - 1
 
 
 

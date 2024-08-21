@@ -228,13 +228,14 @@ def _reverse_sort(inlist: list[int], left:int, right: int) -> list[int]:
 
 def _reverse_partition(inlist: list[int], left: int, right: int, pivot: int) -> int:
     inlist[pivot], inlist[left] = inlist[left], inlist[pivot]
+    at_pivot = inlist[left]
+    left_index = left + 1
     for i in range(left + 1, right + 1):
-        if inlist[i] >= inlist[pivot]:
-            inlist[i], inlist[left + 1] = inlist[left + 1], inlist[i]
-            left += 1
-    inlist[pivot], inlist[left] = inlist[left], inlist[pivot]
-    pivot = left
-    return pivot
+        if inlist[i] > at_pivot:
+            inlist[i], inlist[left_index] = inlist[left_index], inlist[i]
+            left_index += 1
+    inlist[left], inlist[left_index - 1] = inlist[left_index - 1], inlist[left]
+    return left_index - 1
 
 def road_illumination(road_length: int, poles: list[int]) -> float:
     """
