@@ -265,12 +265,19 @@ def road_illumination(road_length: int, poles: list[int]) -> float:
     road_illumination(5, [2, 5]) == 2.0
     """
 
-    #consecutive pairs in the list distance x away need 2x minimum to illuminate
+    #consecutive pairs in the list distance x away need x/2 minimum to illuminate
     #maybe ??
-    current_rad = 0
-    poles = _sort(poles, 0, len(poles) -1))
-    for (index, i) in enumerate(poles):
-        if i 
+    _sort(poles, 0, len(poles) -1)
+    if poles[0] >= road_length - poles[len(poles)-1]:
+        current_rad = 2 * poles[0]
+    else:
+        current_rad = 2 * (road_length - poles[len(poles) - 1])
+    for index in range(0,len(poles)-2):
+        print(current_rad)
+        diff = abs(poles[index] - poles[index + 1])
+        if diff > current_rad:
+            current_rad = diff
+    return current_rad / 2
 
 
 
@@ -282,9 +289,9 @@ def _sort(inlist: list[int], left:int, right: int) -> list[int]:
     if left >= right:
         return
     pivot = randint(left, right)
-    h = _reverse_partition(inlist, left, right, pivot)
-    _reverse_sort(inlist, left, h -1)
-    _reverse_sort(inlist, h + 1, right)
+    h = _partition(inlist, left, right, pivot)
+    _sort(inlist, left, h -1)
+    _sort(inlist, h + 1, right)
 
 def _partition(inlist: list[int], left: int, right: int, pivot: int) -> int:
     inlist[pivot], inlist[left] = inlist[left], inlist[pivot]

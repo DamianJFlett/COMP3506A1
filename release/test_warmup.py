@@ -71,6 +71,8 @@ def test_road_illumination():
     A simple set of tests for the road illumination problem.
     This is not marked and is just here for you to test your code.
     """
+    print("road_illumination(15, [15, 5, 3, 7, 9, 14, 0]) = ",road_illumination(15, [15, 5, 3, 7, 9, 14, 0]))
+    print("road_illumination(5, [2,5]) = ",road_illumination(5,[2,5]))
 
 # The actual program we're running here
 if __name__ == "__main__":
