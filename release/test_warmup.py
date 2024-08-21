@@ -64,6 +64,7 @@ def test_number_game():
     """
     print("number_game([5, 2, 7,3]) = ", number_game([5,2,7,3]))
     print("number_game([1,8 ,5, -9,2]) = ", number_game([1,8,5,-9,2]))
+    print(number_game([1,5,4,2,1,3,5,32,3,9,102,1,-2,4]))
 
 def test_road_illumination():
     """

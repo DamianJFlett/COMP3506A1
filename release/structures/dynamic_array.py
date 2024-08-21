@@ -21,24 +21,14 @@ class DynamicArray:
         A helper that allows you to print a DynamicArray type
         via the str() method.
         """
-        rep = "["
-        if not self._reversed: 
-            i = self._first
-            while i < self._last:
-                rep += str(self._elements[i])
-                rep += ", "
-                i += 1
-            rep += str(self._elements[self._last])
-            rep += "]"
-        else:
-            i = self._last
-            while i > self._first:
-                rep += str(self._elements[i])
-                rep += ", "
-                i -= 1
-            rep += str(self._elements[self._first])
-            rep += "]"
-
+        rep = "[" 
+        i = 0
+        while i < self._size -1:
+            rep += str(self[i])
+            rep += ", "
+            i += 1
+        rep += str(self[self._size - 1])
+        rep += "]"
         return rep
 
     def __resize(self) -> None:
@@ -221,7 +211,7 @@ class DynamicArray:
         """
         Sorts the list list into descending order recursively and in-place via quicksort
         """
-        if left > right:
+        if left >= right:
             return
         pivot = randint(left, right)
         h = self._reverse_partition(left, right, pivot)
